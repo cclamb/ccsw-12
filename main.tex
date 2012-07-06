@@ -1,0 +1,86 @@
+\documentclass{acm_proc_article-sp}
+%\documentclass{sig-alternate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{multirow}
+
+% Include PDF graphics, configure our images directory, and specify image types.
+\usepackage{graphicx}
+\usepackage{epsfig}
+\graphicspath{{./images/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.jpg}
+
+% Style listings
+\lstset{%rulesepcolor=\color{Gray},
+        frame=single,                        	% Shadow box frame around code
+        basicstyle=\scriptsize\ttfamily,        % Use small true type font
+        showstringspaces=false,                 % Don't put marks in string spaces
+        morecomment=[l][\color{Blue}]{...},     % Line continuation (...) like blue comment
+}
+
+\begin{document}
+
+\title{Dynamic, Secure Resource Control in the Cloud}
+
+\numberofauthors{1}
+
+\author{
+\alignauthor
+Edward J. Nava, Viswanath Nandina, Jos\'e Marcio Luna, Christopher C. Lamb, Gregory L. Heileman, Chaouki T. Abdallah\\
+       \affaddr{University of New Mexico}\\
+       \affaddr{Department of Electrical and Computer Engineering}\\
+       \affaddr{Albuquerque, NM 87131-0001}\\
+       \email{\{ejnava, vishu, jmarcio, cclamb, heileman, chaouki\}@ece.unm.edu}
+}
+
+\conferenceinfo{CCSW' 12,} {October 19, 2012, Raleigh, NC, USA.} 
+\CopyrightYear{2011} 
+\crdata{978-1-4503-1005-5/11/10} 
+\clubpenalty=10000 
+\widowpenalty = 10000
+
+\maketitle
+
+\begin{abstract}
+In this paper we describe the development of a domain specific language (DSL) for expressing usage management policies and associating those policies with managed artifacts.  We begin by framing a model for the language, including generalized use cases, a domain model, a general supported life-cycle, and specific extension requirements.  We then develop the language from that model, demonstrating key syntactic elements and highlighting the technology behind the language while tracing features back to the initial model.  We then demonstrate how the DSL supports common usage management and DRM-centric environments, including creative commons, the extensible rights markup language (XrML), and the open digital rights language (ODRL).
+\end{abstract}
+
+\category{D.3.0}{Software}{Programming Languages}[General]
+\terms{Design, Languages, Security}
+\keywords{Access Control, Interoperability, DRM, Usage Management}
+
+\section{Introduction}
+In this paper, we define usage management as the ability to control actions over resources and data across and within computing environments.  More than access control or digital rights management, usage management addresses with fine-grained control of all aspects of how a given digital resource is used.  As digital environments become more open over time, the need for usage management for resources that span utility computational environments (e.g. cloud provider systems) will become increasingly important \cite{ctrl:lamb-MCCCS,ctrl:lamb-SOSE}.
+
+With the advent and widespread use of cloud computing, those responsible for a given usage managed resource are almost never those responsible for the computing systems, except at edge devices like mobile phones or other small profile computing devices.  Resources are regularly moved across national boundaries and regional areas without either the content owner's or creator's knowledge.  Furthermore, this kind of transfer is generally according to pre-established algorithms or data routing protocols over which users have no control.  Managing these issues requires new usage management capabilities that can run on platforms ranging from small, hand-held devices to nodes in large data centers.
+
+Research in this area has been focused on developing more expressive policy languages via either different types of mathematical logics or formalisms with greater reasoning capabilities~\cite{ArHu:07,BaMi:06,ChCoEtHaJoLa:03,HaWe:04,HaWe:08,PuWe:02,XiBjFu:08}.  These approaches however fail to address interoperability challenges posed by new commercially available distributed computing environments.  Interoperability efforts have resorted to translation mechanisms, where the policy is translated in its entirety to a different language~\cite{HeJa:05,PoPrDe:04,ScTaWo:04}; it has been shown recently however that such techniques are infeasible and hard to perform for most policy languages~\cite{KoLaMaMi:04, SaShUe:04}. Other approaches have led to complex policy specification languages that have tried to establish themselves as the universal standard~\cite{OMADRM,ODRL-req,Wa:04,XrML-spec}.  This unfortunately tends to stifle both innovation and flexibility~\cite{HeJa:05,JaHe:04,JaHe:08,JaHeMa:06}.
+
+To address these issues, we first applied the principles of system design to develop a framework for usage management in open, distributed environments that supports interoperability. These principles have been used by researchers in large network design to create a balance between interoperability and open, flexible architectures~\cite{Al:04,BlCl:01,ClWrSoBr:02}, without sacrificing innovation. Initially we standardized certain features of the framework operational semantics, and left free of standards features that necessitate choice and innovation.
+
+We have implemented this framework, including a usage management calculus providing a platform for usage management, within a Domain Specific Language (DSL) and associated evaluation environment. The DSL and its environment implements the previously defined framework, separating various roles needed for distributed policy creation and management, provides the capability to develop executable licenses, and is extensible from both a policy and constraint definition perspective.
+
+In this paper, we will first review the problems in usage management in more detail, providing the context for this DSL and the problems it helps solve.  Then, in Section \ref{sec:model} we will first review the model we developed to guide the DSL's syntactic and semantic development. In the next section, we will cover the language itself, how it was developed, and its supporting evaluation environment.  We will then close the paper with three specific implementation examples showing how the language and its runtime support usage management scenarios from three different environments --- creative commons (CC), the extensible rights markup language (XRML), and the open digital rights language (ODRL).
+
+\section{Motivation}\label{sec:motivation}
+Usage management incorporates specific characteristics of traditional access control and digital rights management incorporating encryption mechanisms, trust management, and trusted computing platforms \cite{Jamkhedkar:2010:IUM:1866870.1866885}.  In order to be effective, it must be flexible enough to provide users with opportunities for differentiation and extension, but interoperable enough to provide services across widely diverging computational environments.
+
+This DSL and runtime provide flexibility through the inclusion of easily pluggable constraint and policy evaluators.  Both types of evaluators simply need to be locatable by the runtime, via standard classpath-style semantics.  If they are, they can be loaded and used with no other configuration required.  A policy file can simply reference the evaluator via a predefined language element, and the runtime will find it and load it automatically, using it to evaluate either the policy itself or the defined constraints (depending on whichever type of evaluator is specified).
+
+The policy runtime elements can be dynamically loaded on host systems when required.  This provides interoperability by forcing the policy system itself to accept the responsibility of ensuring it is installed wherever needed.  The technology upon which the runtime is based is widely available as well.  Additionally, the policies can be transferred from one host to another and can be directly executed upon delivery.  Furthermore, this language and system can express the semantics of common rights management environments, providing additional semantic flexibility and interoperability.
+
+The DSL we describe, in tandem with its runtime, embodies an interoperable framework for usage management, unlike Coral and Marlin architectures, that implements a formal calculus to reason about the relationship between a license, a computing environment, and interoperability between them. It incorporates concepts such as programmable licenses and common ecosystems used by Coral and Marlin architectures respectively. The DSL design is based on the principles of {\em design for choice}, eloquently described by Clarke et al. with reference to ``tussles'' in cyberspace~\cite{ClWrSoBr:02}. They explain the importance of identifying the locations in the architecture where standards need to be introduced to enable interoperability, and locations where they should {\em not} be applied to enable innovation and differentiation.  By supporting pluggable evaluators that allow users to extend the basic language syntax, semantics, and runtime arbitrarily, this language system provides space for innovation.
+
+\section{Conclusions and Future Works}
+Usage management is a common problem set with features embodied in domains ranging from security systems to video games to music production and retail.  The ability to provide management of resources with regard to authorized subjects is being addressed in multiple different forums, many of which are taking remarkably different approaches.  Common features however generally include the need for either ubiquitous rights expression language acceptance or for extensive translation between all supported rights languages.
+
+In this paper, we first demonstrated the development of the initial model used to define the problem space.  Here, we described the general use of the system, who the primary users were, what the expected life-cycle of policies was, and what the domain model looked like.  We then implemented the syntax of the DSL, in Ruby, as an internal DSL with specific examples.  We concluded the paper with demonstrations of equivalence to common rights management frameworks like the creative commons, ODRL, and XrML.
+
+We have only begun to specify and use this particular DSL.  Future focus on this effort will include additional language elaboration, exploration, and use in specific scenarios.  We need to spend additional time engineering the underlying software as well, so we can ensure that policies are in fact platform and environment agnostic, portable, and executable.  Finally, this implementation is an internal DSL within the Ruby language; we need to explore the application of external DSL techniques to this domain to better understand the required compromises between expressiveness and development difficulty and begin to apply more stringent security models to the system itself.
+
+\bibliographystyle{abbrv}
+\bibliography{bib/drm}
+
+\end{document}
