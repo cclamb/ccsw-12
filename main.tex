@@ -36,7 +36,7 @@ Edward J. Nava, Viswanath Nandina, Jos\'e Marcio Luna, Christopher C. Lamb, Greg
 }
 
 \conferenceinfo{CCSW' 12,} {October 19, 2012, Raleigh, NC, USA.} 
-\CopyrightYear{2011} 
+\CopyrightYear{2012} 
 \crdata{978-1-4503-1005-5/11/10} 
 \clubpenalty=10000 
 \widowpenalty = 10000
@@ -47,8 +47,8 @@ Edward J. Nava, Viswanath Nandina, Jos\'e Marcio Luna, Christopher C. Lamb, Greg
 In this paper we describe the development of a system that provides security and performance controls over content in a cloud environment.  Using artifacts that are classed at different sensitivity levels associated with service level agreements (SLAs) describing how and where they can be used, we are able to successfully provision resources in a hybrid cloud environment.  These provisioned resources are created to match both performance characteristics as well as specific sensitivity restrictions specified within associated SLAs.
 \end{abstract}
 
-\category{D.3.0}{Software}{Programming Languages}[General]
-\terms{Design, Languages, Security}
+\category{D.2.11}{Software}{Software Architectures}[Domain-specific Architectures]
+\terms{Design, Performance, Security}
 \keywords{Access Control, Interoperability, DRM, Usage Management}
 
 \section{Introduction}\label{sec:introduction}
@@ -60,7 +60,7 @@ One of the central problems with respect to usage management application in clou
 
 Furthermore, cloud computing is emerging as the future of utility systems hosting for consumer-facing applications.  In these kinds of systems, components, applications, and hardware are provided as utilities over the Internet with associated pricing schemes pegged by system demand.  Users accept specific Quality-of-Service (QoS) guidelines that providers use to provision and eventually allocate resources. These guidelines become the basis over which providers charge for services. 
 
-This work focuses on developing integrated service level agreements (SLAs) that address both traditional performance measures as well as security and usage management directives.  We feel that cloud monitoring capabilities have over the past year reached the point at which commercial providers supply enough performance monitoring and system management primitives to begin to implement cloud-scale automatic management systems addressing data processing suitability from both performance and security perspectives.  For example, Amazon now supplies information through their CloudWatch product and provides a robust control interface via their Elastic Compute Cloud (EC2).  Likewise, private cloud infrastructure-as-a-service (Iaas) offerings like OpenStack and Eucalyptus provide similar control interfaces, simplifying control of hybrid systems.
+This work focuses on developing integrated SLAs that address both traditional performance measures as well as security and usage management directives.  We feel that cloud monitoring capabilities have over the past year reached the point at which commercial providers supply enough performance monitoring and system management primitives to begin to implement cloud-scale automatic management systems addressing data processing suitability from both performance and security perspectives.  For example, Amazon now supplies information through their CloudWatch product and provides a robust control interface via their Elastic Compute Cloud (EC2).  Likewise, private cloud infrastructure-as-a-service (Iaas) offerings like OpenStack and Eucalyptus provide similar control interfaces, simplifying control of hybrid systems.
 
 In this paper we first develop the mechanisms to enable control based on SLA established performance and security measures.  Then, we introduce a prototypical system architecture based on widely used open-source tooling to establish a simple proof of concept.  Finally we discuss preliminary observations from running our prototypical system in a hybrid cloud enfvironment.
 
