@@ -1,5 +1,5 @@
-\documentclass{acm_proc_article-sp}
-%\documentclass{sig-alternate}
+%\documentclass{acm_proc_article-sp}
+\documentclass{sig-alternate}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{listings}
@@ -58,42 +58,43 @@ Herein, we define usage management as the ability to control actions over resour
 
 One of the central problems with respect to usage management application in cloud environments is the ability to specify and enforce specific levels of usage management over resources.  The essential mobility of information within private, public, and hybrid cloud environments makes this management virtually impossible currently, leaving system developers left with the sole option of designing proprietary information management capabilities.  These capabilities become more and more expensive to develop as computational environments become increasingly distributed, and are generally a nightmare to manage, both due to the proliferation of disparate technology throughout the available public and private cloudosphere. 
 
-Furthermore, cloud computing is emerging as the future of utility systems hosting for consumer-facing applications.  In these kinds of systems, components, applications, and hardware are provided as utilities over the Internet with associated pricing schemes pegged by system demand.  Users accept specific Quality-of-Service (QoS) guidelines that providers use to provision and eventually allocate resources. These guidelines become the basis over which providers charge for services. 
+%Furthermore, cloud computing is emerging as the future of utility systems hosting for consumer-facing applications.  In these kinds of systems, components, applications, and hardware are provided as utilities over the Internet with associated pricing schemes pegged by system demand.  Users accept specific Quality-of-Service (QoS) guidelines that providers use to provision and eventually allocate resources. These guidelines become the basis over which providers charge for services. 
 
 This work focuses on developing integrated SLAs that address both traditional performance measures as well as security and usage management directives.  We feel that cloud monitoring capabilities have over the past year reached the point at which commercial providers supply enough performance monitoring and system management primitives to begin to implement cloud-scale automatic management systems addressing data processing suitability from both performance and security perspectives.  For example, Amazon now supplies information through their CloudWatch product and provides a robust control interface via their Elastic Compute Cloud (EC2).  Likewise, private cloud infrastructure-as-a-service (Iaas) offerings like OpenStack and Eucalyptus provide similar control interfaces, simplifying control of hybrid systems.
 
 In this paper we first develop the mechanisms to enable control based on SLA established performance and security measures.  Then, we introduce a prototypical system architecture based on widely used open-source tooling to establish a simple proof of concept.  Finally we discuss preliminary observations from running our prototypical system in a hybrid cloud enfvironment.
 
 \section{Contributing Work}\label{sec:motivation}
-Current policy-centric systems are being forced to move to cloud environments and incorporate much more open systems.  Driven by both cost savings and efficiency requirements, this migration will result in a loss of control of computing resources by involved organizations as they attempt to exploit economies of scale and utility computing.
+%Current policy-centric systems are being forced to move to cloud environments and incorporate much more open systems.  Driven by both cost savings and efficiency requirements, this migration will result in a loss of control of computing resources by involved organizations as they attempt to exploit economies of scale and utility computing.
+%
+%Robust usage management will become an even more important issue in these environments.  Federal organizations poised to benefit from this migration include agencies like the National Security Agency (NSA) and the Department of Defense (DoD), both of whom have large installed bases of compartmentalized and classified data.  The DoD realizes the scope of this effort, understanding that such technical change must incorporate effectively sharing needed data with other federal agencies, foreign governments, and international organizations \cite{proposal:info-sharing-strategy}.  Likewise, the NSA is focused on using cloud-centric systems to facilitate information dissemination and sharing \cite{proposal:nsa-cloud}.
 
-Robust usage management will become an even more important issue in these environments.  Federal organizations poised to benefit from this migration include agencies like the National Security Agency (NSA) and the Department of Defense (DoD), both of whom have large installed bases of compartmentalized and classified data.  The DoD realizes the scope of this effort, understanding that such technical change must incorporate effectively sharing needed data with other federal agencies, foreign governments, and international organizations \cite{proposal:info-sharing-strategy}.  Likewise, the NSA is focused on using cloud-centric systems to facilitate information dissemination and sharing \cite{proposal:nsa-cloud}.
+%Cloud systems certainly exhibit economic incentives for use, providing cost savings and flexibility, but they also have distinct disadvantages as well.  Specifically, the are not intrinsically as private as some current systems, generally can be less secure than department-level solutions, and have extensive trust and privacy issues \cite{proposal:privacy-security-trust-cloud}.
 
-Cloud systems certainly exhibit economic incentives for use, providing cost savings and flexibility, but they also have distinct disadvantages as well.  Specifically, the are not intrinsically as private as some current systems, generally can be less secure than department-level solutions, and have extensive trust and privacy issues \cite{proposal:privacy-security-trust-cloud}.
+%How to address these issues is an open research question.  Organizations ranging from cloud service providers to governments are exploring how to engineer solutions to these problems, and to more clearly understand the trade-offs required between selected system architectures \cite{proposal:assured-info-sharing}.  The problems themselves are wide ranging, appearing in a variety of different systems.  Healtcare and government systems are clearly impacted by these kinds of trust and security issues, and they also have clear information sensitivity problems.  This, coupled with the fact that these organizations have been dealing with these issues in one form or another for decades make them very well suited for prototypical implementation and study.
 
-How to address these issues is an open research question.  Organizations ranging from cloud service providers to governments are exploring how to engineer solutions to these problems, and to more clearly understand the trade-offs required between selected system architectures \cite{proposal:assured-info-sharing}.  The problems themselves are wide ranging, appearing in a variety of different systems.  Healtcare and government systems are clearly impacted by these kinds of trust and security issues, and they also have clear information sensitivity problems.  This, coupled with the fact that these organizations have been dealing with these issues in one form or another for decades make them very well suited for prototypical implementation and study.
-
-Over the past few years multiple service-based paradigms such as web services, cluster computing and grid computing have contributed to the development of what we now call cloud computing \cite{Bu:09}. Cloud computing distinctly differentiates itself from other service-based computing paradigms via a collective set of distinguishing characteristics:  market orientation, virtualization, dynamic provisioning of resources, and service composition via multiple service providers \cite{BuYeVeBrBr:09}. This implies that in cloud computing, a cloud-service consumer's data and applications reside inside that cloud provider's infrastructure for a finite amount of time.  Partitions of this data can in fact be handled by multiple cloud services, and these partitions may be stored, processed and routed through geographically distributed cloud infrastructures. These activities occur within a cloud, giving the cloud consumer an impression of a single virtual system.  These operational characteristics of cloud computing can 
-raise concerns regarding the manner in which cloud consumer's data and applications are managed within a given cloud. Unlike other computing paradigms with a specific computing task focus, cloud systems enable cloud consumers to host entire applications on the cloud (i.e. software as a service) or to compose services from different providers to build a single system. As consumers aggressively start exploiting these advantages to transition IT services to external utility computing systems, the manner in which data and applications are handled within those systems by various cloud services will become a matter of serious concern \cite{Jamkhedkar:2010:IUM:1866870.1866885}.
+Over the past few years multiple service-based paradigms such as web services, cluster computing and grid computing have contributed to the development of what we now call cloud computing \cite{Bu:09}. Cloud computing distinctly differentiates itself from other service-based computing paradigms via a collective set of distinguishing characteristics:  market orientation, virtualization, dynamic provisioning of resources, and service composition via multiple service providers \cite{BuYeVeBrBr:09}. This implies that in cloud computing, a cloud-service consumer's data and applications reside inside that cloud provider's infrastructure for a finite amount of time.  Partitions of this data can in fact be handled by multiple cloud services, and these partitions may be stored, processed and routed through geographically distributed cloud infrastructures. These activities occur within a cloud, giving the cloud consumer an impression of a single virtual system.  These operational characteristics of cloud computing can raise concerns regarding the manner in which cloud consumer's data and applications are managed within a given cloud. Unlike other computing paradigms with a specific computing task focus, cloud systems enable cloud consumers to host entire applications on the cloud (i.e. software as a service) or to compose services from different providers to build a single system. As consumers aggressively start exploiting these advantages to transition IT services to external utility computing systems, the manner in which data and applications are handled within those systems by various cloud services will become a matter of serious concern \cite{Jamkhedkar:2010:IUM:1866870.1866885}.
 
 A growing body of research has begun to appear over the past two years applying control theory to tuning computer systems.  These range from controlling network infrastructure \cite{ctrl:ariba-GL:2009} to controlling virtualized infrastructure and specific computer systems \cite{ctrl:wang-cgswrzh:2009}, \cite{ctrl:kjaer-kr:2009} to exploring feedforward solutions based on predictive modeling \cite{ctrl:abdelwahed-bsk:2009}.  Significant open questions remain within this field \cite{ctrl:Zhu:2009:CTB:1496909.1496922}, \cite{ctrl:hellerstein-sw:2009}.
 
-To address these issues, we first applied the principles of system design to develop a framework for usage management in open, distributed environments that supports interoperability. These principles have been used by researchers in large network design to create a balance between interoperability and open, flexible architectures~\cite{Al:04,BlCl:01,ClWrSoBr:02}, without sacrificing innovation. Initially we standardized certain features of the framework operational semantics, and left free of standards features that necessitate choice and innovation.
+%To address these issues, we first applied the principles of system design to develop a framework for usage management in open, distributed environments that supports interoperability. These principles have been used by researchers in large network design to create a balance between interoperability and open, flexible architectures~\cite{Al:04,BlCl:01,ClWrSoBr:02}, without sacrificing innovation. Initially we standardized certain features of the framework operational semantics, and left free of standards features that necessitate choice and innovation.
 
-Usage management incorporates specific characteristics of traditional access control and digital rights management incorporating encryption mechanisms, trust management, and trusted computing platforms \cite{Jamkhedkar:2010:IUM:1866870.1866885}.  In order to be effective, it must be flexible enough to provide users with opportunities for differentiation and extension, but interoperable enough to provide services across widely diverging computational environments.
+\section{Conceptual Configuration}
+Usage management incorporates specific characteristics of traditional access control and digital rights management incorporating encryption mechanisms, trust management, and trusted computing platforms \cite{Jamkhedkar:2010:IUM:1866870.1866885}.  In order to be effective, it must be flexible enough to provide users with opportunities for differentiation and extension, but interoperable enough to provide services across widely diverging computational environments.  In this paper, we use images as the controlled resources, where each image has a set of policies associated with it that describe the circumstances under which that image can be used.
 
-\section{Usage Management \\ \& Access Control}
-Usage management is the concept of managing resources within computational ecosystems.  These resources are controlled by images.  Each image has policies associated with it that describe the circumstances in which the image can be used. Likewise, each user has an identity associated with them that describe their credentials as well as environment information, also known as context. Usage management occurs when a user's identity information is compared with a resources' policies to determine if that user is qualified to use that particular resource.
+Likewise, each user is associated with an identity that describes their credentials and environment information, also known as context. Usage management occurs when a user's identity information is compared with a resources' policies to determine if that user is qualified to use that particular resource.
 
 \subsection{Access Control}
-Access control is utility to manage controlled access resources.  The various components of our access control model are given below:
+Access control is utility to manage controlled access resources.  The various components of our access control model are:
+\begin{itemize}
 
-Roles: The roles table is used to record user's roles. There is an entry for each user. It consists of an id, which is a unique identifier that defines different type of roles, and another field called parent, which can be used to define inheritance. 
-Resources: The resource table is used to identify each resource whose access is being controlled. Each entry consists of an id, which is a unique identifier, and another field for the resource descriptor. A resource can be anything from a file to a service.
-RolesResources: The RolesResouces is the access control mapping between the roles and resources. It consists of 3 fields. The first entry in the column identifies the user by Roleid. The second entry contains the id of a resource to which a user is authorized access. The third field defines the user's privileges for that resource.
+\item \textbf{Roles}: The roles table is used to record user's roles. There is an entry for each user. It consists of an id, which is a unique identifier that defines different type of roles, and another field called parent, which can be used to define inheritance.
 
-\subsection{Cloud Computing}
-There are different models for cloud computing ranging from software as a service (SaaS) to infrastructure as a service (IaaS). For our implementation we are only concerned with IaaS. Cloud computing systems include both public and private systems. 
+\item \textbf{Resources}: The resource table is used to identify each resource whose access is being controlled. Each entry consists of an id, which is a unique identifier, and another field for the resource descriptor. A resource can be anything from a file to a service.
+
+\item \textbf{RolesResources}: The RolesResouces is the access control mapping between the roles and resources. It consists of 3 fields. The first entry in the column identifies the user by Roleid. The second entry contains the id of a resource to which a user is authorized access. The third field defines the user's privileges for that resource.
+
+\end{itemize} 
 
 \subsection{System Specifications}
 \subsubsection{System Overview}
@@ -115,28 +116,30 @@ Resources are typically stored in a cloud computing repository such as Amazon Si
   \caption{Component Diagram of Usage Management for a Cloud-Based System}
   \label{fig:convergence}
 \end{figure}
-1.  User logs into Login Manager\\
-2.  Request \& forward credentials to Resource Manager\\
-3.  List of available resources returned to the user\\
-4.  The Resource Manager retrieves user information from Meta-Data repository\\
-5.a. User selects a resource\\
-5.b. Cloud Manager retrieves resource from Amazon S3\\
-5.c. Cloud Manager creates an appropriate Virtual Machine instance\\
-5.d. Instance created\\
-5.e. Control monitoring \& processing\\
-5.f. Returns results of processing
 
-The operational details of our usage management system are visualized in Figure 1.  By means of a web browser user interface, the user is presented with a login dialog box. The user enters user credentials to log into the system. The credentials are forwarded to the Resource Manager. The Resource Manager queries a Meta-Data repository to get information about the user.  Once the user's identification has been authenticated, a list of available resources is presented on the user's browser.  This list of resources varies depending on user context. If the user selects a resource, the Cloud Manager software retrieves the desired resource from a cloud computing repository like Amazon S3.  The Cloud Manager software then instantiates an appropriate Virtual Machine specified to handle resources with the same security context. The Cloud Manager also monitors the instance and returns references about the performance of the node to the Cloud Manager.  Using the approach explained in Section [?], we regulate the performance measures of the system that are covered by SLA requirements.
 
-\subsubsection{Implementation}
-\begin{figure}[h]
-  \begin{center}
-    \includegraphics[width=.49\textwidth]{Technology_Architecture}
-  \end{center}
-  \caption{Technology Architecture}
-  \label{fig:convergence}
-\end{figure}
-The implementation of the system is shown in Figure 2.  The application is written using Zend framework and we use MySQL for the database services. When a user logs in, we use Zend to authenticate and determine the role of the user. Once a user is authenticated we use ACL to decide what resources the user can access. Based on the resources available to the user we present the user with a list of images the user can run on a Virtual Machine. It is important to note the actual resources are stored in Amazon S3 and some of the features of the Eucalyptus cloud system have been omitted from our diagram for the sake of brevity.  If the user selects a resource, we query the resource table to get the appropriate keys and then execute the image in the virtual machine specified to manage resources with the appropriate security categories.  With the help of our software we monitor the VMs for performance as defined in the SLA requirements and control the VM appropriately.
+%1.  User logs into Login Manager\\
+%2.  Request \& forward credentials to Resource Manager\\
+%3.  List of available resources returned to the user\\
+%4.  The Resource Manager retrieves user information from Meta-Data repository\\
+%5.a. User selects a resource\\
+%5.b. Cloud Manager retrieves resource from Amazon S3\\
+%5.c. Cloud Manager creates an appropriate Virtual Machine instance\\
+%5.d. Instance created\\
+%5.e. Control monitoring \& processing\\
+%5.f. Returns results of processing
+
+The operational details of our usage management system are visualized in Figure 1.  By means of a web browser user interface, the user is presented with a login dialog box. The user enters user credentials to log into the system. The credentials are forwarded to the Resource Manager. The Resource Manager queries a Meta-Data repository to get information about the user.  Once the user's identification has been authenticated, a list of available resources is presented on the user's browser.  This list of resources varies depending on user context. If the user selects a resource, the Cloud Manager software retrieves the desired resource from a cloud computing repository like Amazon S3.  The Cloud Manager software then instantiates an appropriate Virtual Machine specified to handle resources with the same security context. The Cloud Manager also monitors the instance and returns references about the performance of the node to the Cloud Manager.  Using the our control-theoretic approach, we regulate the performance measures of the system that are covered by SLA requirements.
+
+%\subsubsection{Implementation}
+%\begin{figure}[h]
+%  \begin{center}
+%    \includegraphics[width=.49\textwidth]{Technology_Architecture}
+%  \end{center}
+%  \caption{Technology Architecture}
+%  \label{fig:convergence}
+%\end{figure}
+%The implementation of the system is shown in Figure 2.  The application is written using Zend framework and we use MySQL for the database services. When a user logs in, we use Zend to authenticate and determine the role of the user. Once a user is authenticated we use ACL to decide what resources the user can access. Based on the resources available to the user we present the user with a list of images the user can run on a Virtual Machine. It is important to note the actual resources are stored in Amazon S3 and some of the features of the Eucalyptus cloud system have been omitted from our diagram for the sake of brevity.  If the user selects a resource, we query the resource table to get the appropriate keys and then execute the image in the virtual machine specified to manage resources with the appropriate security categories.  With the help of our software we monitor the VMs for performance as defined in the SLA requirements and control the VM appropriately.
 
 \section{Security Category Analysis}
 \subsection{Security Categories}
@@ -155,11 +158,9 @@ An overall system category is the high water mark value of the three individual 
 A security policy-based control system will contain a table with information system security category information that will be used as a basis for allowing or not allowing a operation on an individual cloud computing system.
 
 \subsection{Protection Measures for Security Objectives}
-
 For each security category, we can use a number of mechanisms to achieve the necessary level of protection, integrity assurance, or availability.  The mechanisms that may be used for each level are proposed below.  For all transactions with data, we assume that a usage mechanism is available to control access as appropriate.  Once the user has been granted access to the data, the mechanisms below would be incorporated into an operating system image that will be loaded on newly instantiated VMs.
 
 Additional protection can be achieved by using private or community cloud computing systems.  This approach would serve to eliminate the sharing of the base hardware with untrusted users, but also forces organizations to pay to install and maintain the systems.  This approach has its merits but also negates some of the cost savings than an organization could get by renting what they need, only when they need it.  As a result, we are focusing on measures that can be used in public cloud computing systems.  The specific measures we propose are shown below.
-
 
 \begin{table}[ht]
 \begin{tabular}{|c|p{2.5in}|}
@@ -215,15 +216,12 @@ L & Data are stored on local machines,
 \caption{Availability}
 \end{table}
 
-
 \subsection{Implementation}
-
- VMs are instantiated to meet computational needs; the specific configuration of each can be controlled.  With no security controls, a user selects one from a set of images that can be used to launch the VM.  The image contains the operating system and other application software that is loaded into the VM when it is instantiated. 
+VMs are instantiated to meet computational needs; the specific configuration of each can be controlled.  With no security controls, a user selects one from a set of images that can be used to launch the VM.  The image contains the operating system and other application software that is loaded into the VM when it is instantiated. 
  
- Images can be configured with mechanisms to implement the functions required for each security category.  Images that process data with security triples of  SC\{H,X,X\}, SC\{M,X,X\}, SC\{X,H,X\}, and SC\{X,M,X\} (X - denotes don't care) should be configured to include intrusion detection system software, firewall software, virus checking software, and operations logging.  In addition, the operating systems should be configured to prevent the user from reconfiguring the operating system and application software.   (As good computer security practice, all images should include virus checking software.)
+Images can be configured with mechanisms to implement the functions required for each security category.  Images that process data with security triples of  SC\{H,X,X\}, SC\{M,X,X\}, SC\{X,H,X\}, and SC\{X,M,X\} (X - denotes don't care) should be configured to include intrusion detection system software, firewall software, virus checking software, and operations logging.  In addition, the operating systems should be configured to prevent the user from reconfiguring the operating system and application software.   (As good computer security practice, all images should include virus checking software.)
  
-\subsection{Implementation Considerations}
-
+\subsection{Implementation Considerations}s
 The security category triple yields a set of $3^{n}$ possible combinations.  With $n = 3$, this results in 27 different security categories to consider in a system design.  As a first step in simplifying the problem to make it more tractable, we will reduce each security objective to two values, low or high.  This reduces the set of possibilities to $2^{n}$, or 8 total.
 
 \begin{table}
@@ -257,13 +255,11 @@ Social Security administration \\
 \caption{Reduced Set of Security Categories}
 \end{table}
 
-
 For demonstration purposes, we will use two VM images, one with SC \{H,H,H\} and the other with SC \{L,L,L\}.  In later development spirals, we will add more VM images that are configured  for the other combinations shown above and potentially combinations with intermediate security levels.  As protection mechanisms impose computational burdens, there is motivation for using images with relaxed security requirements. Images configured for high consequence security categories can be used with systems with low consequences, but the converse is not true.  So, there is motivation to have VM images that are tailored for the security requirements.  By using the simplification shown above, configuring a set of images to handle each of the combinations is manageable. 
 
 The experimental system configuration is shown in the figure below.
 
 \section{Systems and Control Approach}
-
 In a cloud computing environment each application may have different performance measures, such as, response time, 
 throughput or even number of instructions per second in the case of compute applications. Furthermore, since our main goal is
 to control more than one performance measure by controlling one or more inputs of the system,
@@ -286,8 +282,8 @@ and a first candidate for the controller.
   \begin{center}
     \includegraphics[width=.49\textwidth]{Fig_Closed_Loop}
   \end{center}
-  \caption{Component Diagram of Usage Management for a Cloud-Based System}
-  \label{fig:convergence}
+  \caption{Control Block Diagram}
+  \label{fig:control}
 \end{figure}
 
 \subsection{Dynamic Model}
