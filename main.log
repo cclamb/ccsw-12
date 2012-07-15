@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 JUL 2012 16:37
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 JUL 2012 17:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -331,18 +331,18 @@ tec-tures--- \T1/aer/m/it/9 Domain-specific
  []
 
 
-Overfull \hbox (7.20535pt too wide) in paragraph at lines 63--64
+Overfull \hbox (7.20535pt too wide) in paragraph at lines 61--62
 \T1/aer/m/n/9 Com-pute Cloud (EC2). Like-wise, pri-vate cloud infrastructure-
  []
 
 
-Overfull \hbox (12.37253pt too wide) in paragraph at lines 76--77
+Overfull \hbox (12.37253pt too wide) in paragraph at lines 66--67
 \T1/aer/m/n/9 sumer's data and ap-pli-ca-tions re-side in-side that cloud provi
 der's
  []
 
 
-Overfull \hbox (12.48923pt too wide) in paragraph at lines 76--77
+Overfull \hbox (12.48923pt too wide) in paragraph at lines 66--67
 \T1/aer/m/n/9 through ge-o-graph-i-cally dis-tributed cloud in-fras-truc-tures.
  These
  []
@@ -351,7 +351,7 @@ Overfull \hbox (12.48923pt too wide) in paragraph at lines 76--77
 
 
 ]
-Overfull \hbox (9.27693pt too wide) in paragraph at lines 104--105
+Overfull \hbox (9.27693pt too wide) in paragraph at lines 92--93
 []\T1/aer/m/n/9 Each user's ac-cess to any data re-sources is con-trolled throu
 gh
  []
@@ -360,10 +360,10 @@ gh
 File: ./images/component.pdf Graphic file (type pdf)
 
 <use ./images/component.pdf>
-Package pdftex.def Info: ./images/component.pdf used on input line 111.
+Package pdftex.def Info: ./images/component.pdf used on input line 99.
 (pdftex.def)             Requested size: 246.96277pt x 370.18413pt.
 
-Overfull \hbox (6.96277pt too wide) in paragraph at lines 111--112
+Overfull \hbox (6.96277pt too wide) in paragraph at lines 99--100
  [] 
  []
 
@@ -372,10 +372,10 @@ File: ./images/Technology_Architecture.pdf Graphic file (type pdf)
 
 <use ./images/Technology_Architecture.pdf>
 Package pdftex.def Info: ./images/Technology_Architecture.pdf used on input lin
-e 134.
+e 122.
 (pdftex.def)             Requested size: 246.96277pt x 196.7323pt.
 
-Overfull \hbox (6.96277pt too wide) in paragraph at lines 134--135
+Overfull \hbox (6.96277pt too wide) in paragraph at lines 122--123
  [] 
  []
 
@@ -384,15 +384,15 @@ Overfull \hbox (6.96277pt too wide) in paragraph at lines 134--135
 File: ./images/Fig_Closed_Loop.pdf Graphic file (type pdf)
 
 <use ./images/Fig_Closed_Loop.pdf>
-Package pdftex.def Info: ./images/Fig_Closed_Loop.pdf used on input line 163.
+Package pdftex.def Info: ./images/Fig_Closed_Loop.pdf used on input line 151.
 (pdftex.def)             Requested size: 246.96277pt x 211.68167pt.
 
-Overfull \hbox (6.96277pt too wide) in paragraph at lines 163--164
+Overfull \hbox (6.96277pt too wide) in paragraph at lines 151--152
  [] 
  []
 
 
-Overfull \hbox (5.66354pt too wide) detected at line 187
+Overfull \hbox (5.66354pt too wide) detected at line 175
 \OML/cmm/m/it/9 ^^^\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 n\OT1/cmr/m/n/9 ) = (\OT1/cm
 r/bx/n/9 u\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 n\OT1/cmr/m/n/9 )[]\OML/cmm/m/it/9 ; 
 [] ; \OT1/cmr/bx/n/9 u\OT1/cmr/m/n/9 (\OML/cmm/m/it/9 n \OMS/cmsy/m/n/9 ^^@ \OM
@@ -403,58 +403,57 @@ L/cmm/m/it/9 M \OT1/cmr/m/n/9 + 1)[]\OML/cmm/m/it/9 ; \OT1/cmr/bx/n/9 y\OT1/cmr
  []
 
 
-Overfull \hbox (16.96048pt too wide) in alignment at lines 221--224
+Overfull \hbox (16.96048pt too wide) in alignment at lines 209--212
  [][][] []
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--234
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--234
+
+ []
+
 [4 <./images/Fig_Closed_Loop.pdf, page is rotated 90 degrees>]
-Underfull \hbox (badness 10000) in paragraph at lines 241--245
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 263--264
+Underfull \hbox (badness 10000) in paragraph at lines 252--253
 []\T1/aer/m/n/9 Data trans-mit-ted in en-crypted form
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 280--282
+Underfull \hbox (badness 10000) in paragraph at lines 269--271
 []\T1/aer/m/n/9 Data trans-mit-ted in en-crypted form
  []
 
 
-Underfull \hbox (badness 1701) in paragraph at lines 280--282
+Underfull \hbox (badness 1701) in paragraph at lines 269--271
 \T1/aer/m/n/9 (HTTPS, SSL, Tun-nels), Data are ver-i-
  []
 
 
-Overfull \hbox (23.24336pt too wide) in paragraph at lines 312--313
-\T1/aer/m/n/9 that pro-cess data with se-cu-rity triples of SC{H,X,X}, SC{M,X,X
-},
- []
-
-
-Underfull \hbox (badness 2932) in paragraph at lines 321--324
+Underfull \hbox (badness 2932) in paragraph at lines 310--313
 \T1/aer/m/n/9 card trans-ac-tions, fi-
  []
 
 
-Underfull \hbox (badness 3579) in paragraph at lines 325--327
+Underfull \hbox (badness 3579) in paragraph at lines 314--316
 \T1/aer/m/n/9 urgent sen-si-tive info,
  []
 
 
-Underfull \hbox (badness 5064) in paragraph at lines 340--342
+Underfull \hbox (badness 5064) in paragraph at lines 329--331
 []\T1/aer/m/n/9 General in-ter-est and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 340--342
+Underfull \hbox (badness 10000) in paragraph at lines 329--331
 \T1/aer/m/n/9 Non-critical in-for-ma-
  []
 
 [5]
-Overfull \hbox (2.3273pt too wide) in paragraph at lines 354--355
+Overfull \hbox (2.3273pt too wide) in paragraph at lines 343--344
 \T1/aer/m/n/9 cur-rent web-centric model, ex-am-in-ing more data-centric tool-
  []
 
@@ -466,7 +465,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  3991 strings out of 493633
  53608 string characters out of 3143378
- 123367 words of memory out of 3000000
+ 121367 words of memory out of 3000000
  7197 multiletter control sequences out of 15000+200000
  51286 words of font info for 69 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
@@ -486,7 +485,7 @@ mf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2011/texmf-dist
 type1/urw/times/utmb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/
 times/utmr8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on main.pdf (6 pages, 331034 bytes).
+Output written on main.pdf (6 pages, 331013 bytes).
 PDF statistics:
  268 PDF objects out of 1000 (max. 8388607)
  151 compressed objects within 2 object streams
