@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: abbrv.bst
+Database file #1: bib/drm.bib
+Database file #2: bib/ucdmo.bib
+Database file #3: bib/ctrl.bib
+Warning--string name "december" is undefined
+--line 124 of file bib/ctrl.bib
+Warning--string name "december" is undefined
+--line 136 of file bib/ctrl.bib
+Warning--string name "december" is undefined
+--line 148 of file bib/ctrl.bib
+Warning--string name "december" is undefined
+--line 160 of file bib/ctrl.bib
+Warning--string name "december" is undefined
+--line 172 of file bib/ctrl.bib
+Database file #4: bib/readings2.bib
+Database file #5: bib/vish.bib
+Warning--to sort, need author or key in FIPS199
+Warning--empty year in ctrl:lamb-MCCCS
+Warning--there's a month but no year in Liu-2007
+You've used 18 entries,
+            2118 wiz_defined-function locations,
+            624 strings with 7624 characters,
+and the built_in function-call counts, 7244 in all, are:
+= -- 709
+> -- 370
+< -- 6
++ -- 147
+- -- 128
+* -- 547
+:= -- 1160
+add.period$ -- 56
+call.type$ -- 18
+change.case$ -- 117
+chr.to.int$ -- 0
+cite$ -- 21
+duplicate$ -- 271
+empty$ -- 549
+format.name$ -- 128
+if$ -- 1548
+int.to.chr$ -- 0
+int.to.str$ -- 18
+missing$ -- 18
+newline$ -- 92
+num.names$ -- 34
+pop$ -- 133
+preamble$ -- 1
+purify$ -- 100
+quote$ -- 0
+skip$ -- 187
+stack$ -- 0
+substring$ -- 450
+swap$ -- 72
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 70
+warning$ -- 3
+while$ -- 61
+width$ -- 20
+write$ -- 204
+(There were 8 warnings)

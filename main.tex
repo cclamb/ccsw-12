@@ -84,7 +84,6 @@ Usage management incorporates specific characteristics of traditional access con
 
 Likewise, each user is associated with an identity that describes their credentials and environment information, also known as context. Usage management occurs when a user's identity information is compared with a resources' policies to determine if that user is qualified to use that particular resource.
 
-\subsection{Access Control}
 Access control is utility to manage controlled access resources.  The various components of our access control model are:
 \begin{itemize}
 
@@ -96,8 +95,6 @@ Access control is utility to manage controlled access resources.  The various co
 
 \end{itemize} 
 
-\subsection{System Specifications}
-\subsubsection{System Overview}
 Our primary goal is to develop and implement a secure, robust, and inter-operable role-based usage management system for data transactions in cloud computing. This system will merge traditional usage management systems with modern cloud computing technologies~\cite{Jamkhedkar:2010:IUM:1866870.1866885}.
 
 The usage management system envisioned consists of an ACL containing a usage hierarchy where every person must adopt one or more of two explicit roles: admin or user. An admin sits atop the hierarchy and therefore has the most privileged access to resources. A user, generally, has limited access only to those resources approved by the usage management policy for that user. Similar to the hierarchal structure of an object-oriented programming language, every admin is a user, but every user is not an admin. Based on an individual's role they are assigned an identification number specific to the role. If someone requires multiple roles then unique identifications must be created for each of those roles. This system access policy is called Role-Based Access Control (RBAC). 
@@ -131,133 +128,16 @@ Resources are typically stored in a cloud computing repository such as Amazon Si
 
 The operational details of our usage management system are visualized in Figure 1.  By means of a web browser user interface, the user is presented with a login dialog box. The user enters user credentials to log into the system. The credentials are forwarded to the Resource Manager. The Resource Manager queries a Meta-Data repository to get information about the user.  Once the user's identification has been authenticated, a list of available resources is presented on the user's browser.  This list of resources varies depending on user context. If the user selects a resource, the Cloud Manager software retrieves the desired resource from a cloud computing repository like Amazon S3.  The Cloud Manager software then instantiates an appropriate Virtual Machine specified to handle resources with the same security context. The Cloud Manager also monitors the instance and returns references about the performance of the node to the Cloud Manager.  Using the our control-theoretic approach, we regulate the performance measures of the system that are covered by SLA requirements.
 
-%\subsubsection{Implementation}
-%\begin{figure}[h]
-%  \begin{center}
-%    \includegraphics[width=.49\textwidth]{Technology_Architecture}
-%  \end{center}
-%  \caption{Technology Architecture}
-%  \label{fig:convergence}
-%\end{figure}
-%The implementation of the system is shown in Figure 2.  The application is written using Zend framework and we use MySQL for the database services. When a user logs in, we use Zend to authenticate and determine the role of the user. Once a user is authenticated we use ACL to decide what resources the user can access. Based on the resources available to the user we present the user with a list of images the user can run on a Virtual Machine. It is important to note the actual resources are stored in Amazon S3 and some of the features of the Eucalyptus cloud system have been omitted from our diagram for the sake of brevity.  If the user selects a resource, we query the resource table to get the appropriate keys and then execute the image in the virtual machine specified to manage resources with the appropriate security categories.  With the help of our software we monitor the VMs for performance as defined in the SLA requirements and control the VM appropriately.
+\subsubsection{Implementation}
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=.49\textwidth]{Technology_Architecture}
+  \end{center}
+  \caption{Technology Architecture}
+  \label{fig:convergence}
+\end{figure}
 
-\section{Security Category Analysis}
-\subsection{Security Categories}
-
-Our plan is to label resources (information) and systems using the NIST standards for security classification of Federal Information and Information Systems~\cite{FIPS199}.
-
-The security objectives for both the information and the information systems are: confidentiality, integrity, and availability.  For both the information and the information systems, the impact of the compromise of each of these objectives is categorized as: low impact, moderate impact, or high impact.  A generalized format for expressing an information type security category as follows:
-
-\begin{math}
-SC= \{confidentiality,integrity,availability\}
-\end{math}
-\\
-
-An overall system category is the high water mark value of the three individual objectives.  For example, a system with moderate impact for confidentiality and low impact for both integrity and availability is given an overall rating as a moderate impact system.
-
-A security policy-based control system will contain a table with information system security category information that will be used as a basis for allowing or not allowing a operation on an individual cloud computing system.
-
-\subsection{Protection Measures for Security Objectives}
-For each security category, we can use a number of mechanisms to achieve the necessary level of protection, integrity assurance, or availability.  The mechanisms that may be used for each level are proposed below.  For all transactions with data, we assume that a usage mechanism is available to control access as appropriate.  Once the user has been granted access to the data, the mechanisms below would be incorporated into an operating system image that will be loaded on newly instantiated VMs.
-
-Additional protection can be achieved by using private or community cloud computing systems.  This approach would serve to eliminate the sharing of the base hardware with untrusted users, but also forces organizations to pay to install and maintain the systems.  This approach has its merits but also negates some of the cost savings than an organization could get by renting what they need, only when they need it.  As a result, we are focusing on measures that can be used in public cloud computing systems.  The specific measures we propose are shown below.
-
-\begin{table}[ht]
-\begin{tabular}{|c|p{2.5in}|}
-\hline
-Level &  Measures Or Mechanisms \\
-\hline
-H & Data encrypted while at rest, 
-    Data transmitted in encrypted form (HTTPS, SSL, Tunnels) \\
-\hline
-M & Data transmitted in encrypted form (HTTPS, SSL, Tunnels) \\
-\hline
-L & Data handled and transmitted in the clear,
-    Use standard OS file protection measures \\
-\hline
-\end{tabular}
-\caption{Confidentiality}
-\end{table}
-
-\begin{table}[ht]
-\begin{tabular}{|c|p{2.5in}|}
-\hline
-Level &  Measures Or Mechanisms \\
-\hline
-H & Data are signed with a secure hash [2],
-    Data transmitted in encrypted form (HTTPS, SSL, Tunnels)\\
-\hline
-M & Data transmitted in encrypted form (HTTPS, SSL, Tunnels),
-    Data are verified with a Message Authentication Code [3]\\
-\hline
-L & Data handled and transmitted in the clear,
-    Use standard OS file protection measures, 
-    Standard Parity checks used\\
-\hline
-\end{tabular}
-\caption{Integrity}
-\end{table}
-
-\begin{table}[ht]
-\begin{tabular}{|c|p{2.5in}|}
-\hline
-Level &  Measures Or Mechanisms \\
-\hline
-H & Data stored using Simple Storage System (S3),
-    (Use built-in redundancy) \\
-\hline  
-M & Data stored using S3,
-    (Use built-in redundancy)\\
-\hline
-L & Data are stored on local machines,
-    Data stored using S3 \\
-\hline
-\end{tabular}  
-\caption{Availability}
-\end{table}
-
-\subsection{Implementation}
-VMs are instantiated to meet computational needs; the specific configuration of each can be controlled.  With no security controls, a user selects one from a set of images that can be used to launch the VM.  The image contains the operating system and other application software that is loaded into the VM when it is instantiated. 
- 
-Images can be configured with mechanisms to implement the functions required for each security category.  Images that process data with security triples of  SC\{H,X,X\}, SC\{M,X,X\}, SC\{X,H,X\}, and SC\{X,M,X\} (X - denotes don't care) should be configured to include intrusion detection system software, firewall software, virus checking software, and operations logging.  In addition, the operating systems should be configured to prevent the user from reconfiguring the operating system and application software.   (As good computer security practice, all images should include virus checking software.)
- 
-\subsection{Implementation Considerations}s
-The security category triple yields a set of $3^{n}$ possible combinations.  With $n = 3$, this results in 27 different security categories to consider in a system design.  As a first step in simplifying the problem to make it more tractable, we will reduce each security objective to two values, low or high.  This reduces the set of possibilities to $2^{n}$, or 8 total.
-
-\begin{table}
-\begin{tabular}{|c|c|c|c|p{1.3in}|}
-\hline
-No. & Conf. & Integ. & Avail. & Potential Examples \\
-\hline
-1 & H & H & H & Medical Records, 
-credit card transactions,
-financial management \\
-\hline
-2 & H & H & L & Applications with non-urgent sensitive info, 
-Social Security administration \\
-\hline
-3 & H & L & H & Can disregard? \\
-\hline
-4 & H & L & L & Can disregard? \\
-\hline
-5 & L & H & H & Breaking News, 
-                Emergency health guidelines \\
-\hline
-6 & L & H & L & General News,
-                Official government documents \\
-\hline
-7 & L & L & H & Weather warnings \\
-\hline
-8 & L & L & L & General interest and
-                Non-critical information \\
-\hline
-\end{tabular} 
-\caption{Reduced Set of Security Categories}
-\end{table}
-
-For demonstration purposes, we will use two VM images, one with SC \{H,H,H\} and the other with SC \{L,L,L\}.  In later development spirals, we will add more VM images that are configured  for the other combinations shown above and potentially combinations with intermediate security levels.  As protection mechanisms impose computational burdens, there is motivation for using images with relaxed security requirements. Images configured for high consequence security categories can be used with systems with low consequences, but the converse is not true.  So, there is motivation to have VM images that are tailored for the security requirements.  By using the simplification shown above, configuring a set of images to handle each of the combinations is manageable. 
-
-The experimental system configuration is shown in the figure below.
+The implementation of the system is shown in Figure 2.  The application is written using Zend framework and we use MySQL for the database services. When a user logs in, we use Zend to authenticate and determine the role of the user. Once a user is authenticated we use ACL to decide what resources the user can access. Based on the resources available to the user we present the user with a list of images the user can run on a Virtual Machine. It is important to note the actual resources are stored in Amazon S3 and some of the features of the Eucalyptus cloud system have been omitted from our diagram for the sake of brevity.  If the user selects a resource, we query the resource table to get the appropriate keys and then execute the image in the virtual machine specified to manage resources with the appropriate security categories.  With the help of our software we monitor the VMs for performance as defined in the SLA requirements and control the VM appropriately.
 
 \section{Systems and Control Approach}
 In a cloud computing environment each application may have different performance measures, such as, response time, 
@@ -352,6 +232,119 @@ discrete-time properties of the system imply some considerations when the SLA im
 performance measures that are not reachable given the discrete-state constrain of the system. However, to overcome 
 this particular issue, we restrict the regulation problem to satisfy only feasible values for all performance measures to
 avoid oscillations or overshoots on the states.
+
+\section{Security Category Analysis}
+Our plan is to label resources (information) and systems using the NIST standards for security classification of Federal Information and Information Systems~\cite{FIPS199}.
+
+The security objectives for both the information and the information systems are: confidentiality, integrity, and availability.  For both the information and the information systems, the impact of the compromise of each of these objectives is categorized as: low impact, moderate impact, or high impact.  A generalized format for expressing an information type security category as follows:
+
+\begin{math}
+SC= \{confidentiality,integrity,availability\}
+\end{math}
+\\
+
+An overall system category is the high water mark value of the three individual objectives.  For example, a system with moderate impact for confidentiality and low impact for both integrity and availability is given an overall rating as a moderate impact system.
+
+A security policy-based control system will contain a table with information system security category information that will be used as a basis for allowing or not allowing a operation on an individual cloud computing system.
+
+\subsection{Protection Measures}
+For each security category, we can use a number of mechanisms to achieve the necessary level of protection, integrity assurance, or availability.  The mechanisms that may be used for each level are proposed below.  For all transactions with data, we assume that a usage mechanism is available to control access as appropriate.  Once the user has been granted access to the data, the mechanisms below would be incorporated into an operating system image that will be loaded on newly instantiated VMs.
+
+Additional protection can be achieved by using private or community cloud computing systems.  This approach would serve to eliminate the sharing of the base hardware with untrusted users, but also forces organizations to pay to install and maintain the systems.  This approach has its merits but also negates some of the cost savings than an organization could get by renting what they need, only when they need it.  As a result, we are focusing on measures that can be used in public cloud computing systems.  The specific measures we propose are shown below.
+
+\begin{table}[ht]
+\begin{tabular}{|c|p{2.5in}|}
+\hline
+Level &  Measures Or Mechanisms \\
+\hline
+H & Data encrypted while at rest, 
+    Data transmitted in encrypted form (HTTPS, SSL, Tunnels) \\
+\hline
+M & Data transmitted in encrypted form (HTTPS, SSL, Tunnels) \\
+\hline
+L & Data handled and transmitted in the clear,
+    Use standard OS file protection measures \\
+\hline
+\end{tabular}
+\caption{Confidentiality}
+\end{table}
+
+\begin{table}[ht]
+\begin{tabular}{|c|p{2.5in}|}
+\hline
+Level &  Measures Or Mechanisms \\
+\hline
+H & Data are signed with a secure hash [2],
+    Data transmitted in encrypted form (HTTPS, SSL, Tunnels)\\
+\hline
+M & Data transmitted in encrypted form (HTTPS, SSL, Tunnels),
+    Data are verified with a Message Authentication Code [3]\\
+\hline
+L & Data handled and transmitted in the clear,
+    Use standard OS file protection measures, 
+    Standard Parity checks used\\
+\hline
+\end{tabular}
+\caption{Integrity}
+\end{table}
+
+\begin{table}[ht]
+\begin{tabular}{|c|p{2.5in}|}
+\hline
+Level &  Measures Or Mechanisms \\
+\hline
+H & Data stored using Simple Storage System (S3),
+    (Use built-in redundancy) \\
+\hline  
+M & Data stored using S3,
+    (Use built-in redundancy)\\
+\hline
+L & Data are stored on local machines,
+    Data stored using S3 \\
+\hline
+\end{tabular}  
+\caption{Availability}
+\end{table}
+
+\subsection{Implementation}
+VMs are instantiated to meet computational needs; the specific configuration of each can be controlled.  With no security controls, a user selects one from a set of images that can be used to launch the VM.  The image contains the operating system and other application software that is loaded into the VM when it is instantiated. 
+ 
+Images can be configured with mechanisms to implement the functions required for each security category.  Images that process data with security triples of  SC\{H,X,X\}, SC\{M,X,X\}, SC\{X,H,X\}, and SC\{X,M,X\} (X - denotes don't care) should be configured to include intrusion detection system software, firewall software, virus checking software, and operations logging.  In addition, the operating systems should be configured to prevent the user from reconfiguring the operating system and application software.   (As good computer security practice, all images should include virus checking software.)
+
+The security category triple yields a set of $3^{n}$ possible combinations.  With $n = 3$, this results in 27 different security categories to consider in a system design.  As a first step in simplifying the problem to make it more tractable, we will reduce each security objective to two values, low or high.  This reduces the set of possibilities to $2^{n}$, or 8 total.
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|p{1.3in}|}
+\hline
+No. & Conf. & Integ. & Avail. & Potential Examples \\
+\hline
+1 & H & H & H & Medical Records, 
+credit card transactions,
+financial management \\
+\hline
+2 & H & H & L & Applications with non-urgent sensitive info, 
+Social Security administration \\
+\hline
+3 & H & L & H & Can disregard? \\
+\hline
+4 & H & L & L & Can disregard? \\
+\hline
+5 & L & H & H & Breaking News, 
+                Emergency health guidelines \\
+\hline
+6 & L & H & L & General News,
+                Official government documents \\
+\hline
+7 & L & L & H & Weather warnings \\
+\hline
+8 & L & L & L & General interest and
+                Non-critical information \\
+\hline
+\end{tabular} 
+\caption{Reduced Set of Security Categories}
+\end{table}
+
+For demonstration purposes, we will use two VM images, one with SC \{H,H,H\} and the other with SC \{L,L,L\}.  In later development spirals, we will add more VM images that are configured  for the other combinations shown above and potentially combinations with intermediate security levels.  As protection mechanisms impose computational burdens, there is motivation for using images with relaxed security requirements. Images configured for high consequence security categories can be used with systems with low consequences, but the converse is not true.  So, there is motivation to have VM images that are tailored for the security requirements.  By using the simplification shown above, configuring a set of images to handle each of the combinations is manageable. 
 
 \section{Conclusions and Future Works}
 Usage management is a common problem set with features embodied in domains ranging from security systems to video games to music production and retail.  The ability to provide management of resources with regard to authorized subjects is being addressed in multiple different forums, many of which are taking remarkably different approaches.  Common features however generally include the need for either ubiquitous rights expression language acceptance or for extensive translation between all supported rights languages.
